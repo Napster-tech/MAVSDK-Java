@@ -6,7 +6,6 @@ configurations {
 
 android {
     namespace "io.mavsdk.androidclient"
-
     compileSdkVersion 33
 
     compileOptions {
@@ -22,6 +21,7 @@ android {
         versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -43,29 +43,43 @@ task checkstyle(type: Checkstyle) {
 
     reports {
         xml.destination new File("$project.buildDir/reports/checkstyle/checkstyle_report.xml")
-
         html.destination new File("$project.buildDir/reports/checkstyle/checkstyle_report.html")
     }
 }
 
 build.dependsOn 'checkstyle'
 
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://api.mapbox.com/downloads/v2/releases/maven' }
+}
+
 dependencies {
     checkstyleClasspath 'com.puppycrawl.tools:checkstyle:8.17'
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    // AndroidX dependencies
+    implementation 'androidx.appcompat:appcompat:1.4.0' // Updated to a newer stable version
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0' // Replaced lifecycle-extensions
+
+    // Logging and UI libraries
     implementation 'com.github.tony19:logback-android:2.0.0'
-    implementation 'com.google.android.material:material:1.2.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.1'
+    implementation 'com.google.android.material:material:1.4.0'
+
+    // Mapbox dependencies
+    implementation 'com.mapbox.maps:android:11.8.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:7.0.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
+
+    // MAVSDK dependencies
     implementation 'io.mavsdk:mavsdk:2.1.0'
     implementation 'io.mavsdk:mavsdk-server:2.1.0'
+
+    // SLF4J logging API
     implementation 'org.slf4j:slf4j-api:2.0.13'
 
-    testImplementation 'junit:junit:4.13'
-
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
+    // Testing dependencies
+    testImplementation 'junit:junit:4.13.2' // Updated to latest
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
 }

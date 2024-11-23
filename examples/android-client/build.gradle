@@ -1,19 +1,30 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.1'
+        classpath 'com.android.tools.build:gradle:8.4.1' // Ensure this version matches your Gradle version
     }
 }
 
 allprojects {
     repositories {
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = "mapbox"
+                password = "sk.eyJ1IjoiYWJoaXNoZWsyNzY1IiwiYSI6ImNtM2Y1djl5ZzBrODAyanEyN3lkbXoydTkifQ.p_WlGK8M5XoQATsjg21Ftg"
+            }
+        }
         google()
-        jcenter()
+        mavenCentral()
     }
+
 }
 
 task clean(type: Delete) {
