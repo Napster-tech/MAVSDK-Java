@@ -18,7 +18,7 @@ allprojects {
             }
             credentials {
                 username = "mapbox"
-                password = "sk.eyJ1IjoiYWJoaXNoZWsyNzY1IiwiYSI6ImNtM2Y1djl5ZzBrODAyanEyN3lkbXoydTkifQ.p_WlGK8M5XoQATsjg21Ftg"
+                password = "YOUR_MAPBOX_ACCESS_TOKEN"
             }
         }
         google()
